@@ -7,7 +7,7 @@ const Note = (props) => {
       <div className={styles.cardInner}>
         <h3>{props.title}</h3>
         <p>{props.text}</p>
-        <button onClick={props.onEdit}>Edit</button>
+        <button onClick={props.onEdit} className={styles.space}>Edit</button>
         <button onClick={props.onDelete}>Delete</button>
       </div>
     </div>
