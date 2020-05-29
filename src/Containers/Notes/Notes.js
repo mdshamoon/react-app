@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Notes.module.css";
 import { useState } from "react";
 import Button from "../../components/UI/Button/Button";
@@ -30,22 +30,39 @@ function Notes() {
   const [lastNote, setLastNote] = useState(4);
   const [dialog, setDialog] = useState(false);
   const [editDialog, setEditDialog] = useState(false);
-  const [editInfo, setEditInfo] = useState({ title: "", text: "" });
+  const [editInfo, setEditInfo] = useState({ id: 0, title: "", text: "" });
 
   function deleteNote(note) {
     allNotes(notes.filter((filterNote) => note.id !== filterNote.id));
   }
 
   function editNote(note) {
-    setEditDialog(true);
     setEditInfo({
+      id: note.id,
       title: note.title,
       text: note.text,
     });
+
+    setEditDialog(true);
   }
 
   function update(event) {
     event.preventDefault();
+    console.log(event.target.title.value);
+    allNotes(
+      notes.map((note) => {
+        if (note.id == event.target.id.value) {
+          return {
+            id: note.id,
+            title: event.target.title.value,
+            text: event.target.text.value,
+          };
+        } else {
+          return note;
+        }
+      })
+    );
+    setEditDialog(false);
   }
   function addNote(event) {
     event.preventDefault();
@@ -75,10 +92,15 @@ function Notes() {
   };
 
   return (
-    <>
-      {/* <Button text="Click Here"></Button>
-        <SearchBar></SearchBar>
-        <Note title="some heading" text="this is my diary"></Note> */}
+    <div className={styles.container}>
+      <h1>My Notes</h1>
+
+      <Button
+        text="Add a new book"
+        onClick={() => {
+          setDialog(true);
+        }}
+      ></Button>
       <div className={styles.noteContainer}>{showNotes()}</div>
       <div className={dialog ? styles.show : styles.hide}>
         <AddNote onSubmit={addNote} />
@@ -87,19 +109,12 @@ function Notes() {
       <div className={editDialog ? styles.show : styles.hide}>
         <EditNote
           onSubmit={update}
+          id={editInfo.id}
           title={editInfo.title}
           text={editInfo.text}
         />
       </div>
-
-      <Button
-        text="Add a new book"
-        onClick={() => {
-          console.log(dialog);
-          setDialog(true);
-        }}
-      ></Button>
-    </>
+    </div>
   );
 }
 

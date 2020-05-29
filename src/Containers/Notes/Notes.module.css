@@ -1,5 +1,13 @@
 .noteContainer {
+  margin-top: 30px;
   display: flex;
+  flex-wrap: wrap;
+}
+
+.container {
+  width: 70%;
+
+  margin: 0px auto;
 }
 
 .show {

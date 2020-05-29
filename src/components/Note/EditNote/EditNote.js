@@ -4,13 +4,13 @@ import styles from "./EditNote.module.css";
 const EditNote = (props) => {
   return (
     <div className={styles.container}>
-      <form onSubmit={props.onSubmit} className={styles.form}>
+      <form onSubmit={props.onSubmit} className={styles.form} key={props.id}>
+        <input name="id" value={props.id} hidden readOnly></input>
         <label>Title</label>
         <input
           type="text"
           name="title"
-          onChange={() => props.title}
-          value={props.title}
+          defaultValue={props.title}
           placeholder="Write yout Title"
         ></input>
 
@@ -18,8 +18,7 @@ const EditNote = (props) => {
         <input
           type="text"
           name="text"
-          onChange={(self) => self.target.value}
-          value={props.text}
+          defaultValue={props.text}
           placeholder="Write yout Note"
         ></input>
         <br></br>
