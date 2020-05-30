@@ -37,6 +37,7 @@ function Notes() {
   }
 
   function editNote(note) {
+    setDialog(false);
     setEditInfo({
       id: note.id,
       title: note.title,
@@ -96,9 +97,10 @@ function Notes() {
       <h1>My Notes</h1>
 
       <Button
-        text="Add a new book"
+        text="Add a new note"
         onClick={() => {
           setDialog(true);
+          setEditDialog(false);
         }}
       ></Button>
       <div className={styles.noteContainer}>{showNotes()}</div>

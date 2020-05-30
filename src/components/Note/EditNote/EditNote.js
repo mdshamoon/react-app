@@ -22,7 +22,7 @@ const EditNote = (props) => {
           placeholder="Write yout Note"
         ></input>
         <br></br>
-        <button>Add a New Note</button>
+        <button>Update</button>
       </form>
     </div>
   );
