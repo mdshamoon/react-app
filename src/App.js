@@ -1,7 +1,6 @@
 import React from "react";
 
-import styles from "./App.module.css";
-import Notes from "./Containers/Notes/Notes.js";
+import Notes from "./Containers/Notes/Notes";
 
 function App() {
   return <Notes></Notes>;
